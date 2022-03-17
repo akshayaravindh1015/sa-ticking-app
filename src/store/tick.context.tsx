@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { initalize2D_Arr } from "../models/grid.model";
+import { tickAndGetNewGrid } from "./tick";
 
 type TickContextObj = {
   grid: number[][];
@@ -26,22 +27,20 @@ const TickContextProvider: React.FC = (props) => {
 
   const tick = () => {
     console.log("ticking....");
+    setGrid((prevGrid) => tickAndGetNewGrid(prevGrid));
   };
 
   const toggleGridVal = (x: number, y: number) => {
-    setGrid((prevGrid) => {
-      // console.log(JSON.stringify(prevGrid));
-      return prevGrid.map((row: number[], rowIndex: number) =>
+    setGrid((prevGrid) =>
+      prevGrid.map((row: number[], rowIndex: number) =>
         row.map((el: number, colIndex: number) => {
           if (rowIndex === x && colIndex === y) {
-            console.log("changing: ", x, y);
             return el === 0 ? 1 : 0;
           }
           return el;
         })
-      );
-    });
-    // console.log(JSON.stringify(grid));
+      )
+    );
   };
 
   const contextValue: TickContextObj = {
