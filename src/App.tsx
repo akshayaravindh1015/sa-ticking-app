@@ -34,15 +34,24 @@ const App = () => {
     }
   };
 
+  const onGenerateRandomGrid = () => {
+    tickCtx.generateRandom();
+  };
+
   return (
     <div className="container">
       <h1>Seeking Alpha React - Test</h1>
-      <PlayPauseButton
-        onClick={clickHanlder}
-        isOn={isTicking}
-        offText="Stop Ticking"
-        onText="Start Ticking"
-      ></PlayPauseButton>
+      <div className="buttons-row">
+        <PlayPauseButton
+          onClick={clickHanlder}
+          isOn={isTicking}
+          offText="Stop Ticking"
+          onText="Start Ticking"
+        ></PlayPauseButton>
+        <button className="secondary" onClick={onGenerateRandomGrid}>
+          Generate Random Grid
+        </button>
+      </div>
       <br />
       <GridContainer />
     </div>
