@@ -1,26 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext, useState } from "react";
 
-function App() {
+import "./App.css";
+import GridContainer from "./components/GridContainer";
+import { TickContext } from "./store/tick.context";
+import PlayPauseButton from "./UI/PlayPauseButton";
+
+const App = () => {
+  const tickCtx = useContext(TickContext);
+
+  const [isTicking, setIsTicking] = useState(false);
+  const [tickingController, setTickingController] = useState();
+
+  const startTimer = () => {
+    const interval: any = setInterval(() => {
+      tickCtx.tick();
+    }, tickCtx.timerVal);
+    setTickingController(interval);
+  };
+
+  const stopPrevTimer = () => {
+    if (!!tickingController) {
+      clearInterval(tickingController);
+    }
+  };
+
+  const clickHanlder = () => {
+    if (isTicking) {
+      stopPrevTimer();
+      setIsTicking(false);
+    } else {
+      startTimer();
+      setIsTicking(true);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h1>Seeking Alpha React - Test</h1>
+      <PlayPauseButton
+        onClick={clickHanlder}
+        isOn={isTicking}
+        offText="Stop Ticking"
+        onText="Start Ticking"
+      ></PlayPauseButton>
+      <br />
+      <GridContainer />
     </div>
   );
-}
+};
 
 export default App;
