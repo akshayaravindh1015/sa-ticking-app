@@ -1,9 +1,25 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { fireEvent, render, screen } from "@testing-library/react";
+import App from "./App";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe("<App />", () => {
+  beforeEach(() => {
+    const { container } = render(<App />);
+  });
+
+  test("renders header properly", () => {
+    const hedingElement = screen.getByText(/Seeking Alpha React - Test/i);
+    expect(hedingElement).toBeInTheDocument();
+  });
+
+  test("Start ticking is toggling properly", () => {
+    const tickButton = screen.getByText(/Start Ticking/i);
+    fireEvent.click(tickButton);
+    expect(screen.getByText(/Stop Ticking/i)).toBeInTheDocument();
+  });
+
+  test("Generate random map button stops ticking", () => {
+    const generateRandomBtn = screen.getByText(/Generate Random Grid/i);
+    fireEvent.click(generateRandomBtn);
+    expect(screen.getByText(/Start Ticking/i)).toBeInTheDocument();
+  });
 });

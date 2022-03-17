@@ -10,7 +10,7 @@ const PlayPauseButton: React.FC<{
 }> = (props) => {
   return (
     <div className={classes["button-wrap"]} onClick={props.onClick}>
-      <span className={classes.text}>
+      <span className={classes.text} data-testid="play-pause-text">
         {props.isOn ? props.offText : props.onText}
       </span>
       <button

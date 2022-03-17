@@ -36,6 +36,8 @@ const App = () => {
 
   const onGenerateRandomGrid = () => {
     tickCtx.generateRandom();
+    stopPrevTimer();
+    setIsTicking(false);
   };
 
   return (

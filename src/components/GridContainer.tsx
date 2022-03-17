@@ -5,18 +5,18 @@ import classes from "./GridContainer.module.css";
 import { TickContext } from "../store/tick.context";
 
 const GridContainer: React.FC = () => {
-  const ctx = useContext(TickContext);
+  const tickCtx = useContext(TickContext);
 
   const onClickOfGridEl = useCallback(
     (xCor: number, yCor: number) => {
-      ctx.toggleGridVal(xCor, yCor);
+      tickCtx.toggleGridVal(xCor, yCor);
     },
     [useCallback]
   );
 
   return (
-    <div className={classes.container}>
-      {ctx.grid.map((row: number[], rowIndex: number) =>
+    <div className={classes.container} data-testid="gird-container">
+      {tickCtx.grid.map((row: number[], rowIndex: number) =>
         row.map((el: number, colIndex: number) => (
           <Cell
             key={`${rowIndex}_${colIndex}`}
@@ -28,6 +28,11 @@ const GridContainer: React.FC = () => {
         ))
       )}
     </div>
+    /*
+    <>
+      {<p>Testing</p>}
+    </>
+    */
   );
 };
 
