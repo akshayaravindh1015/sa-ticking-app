@@ -15,18 +15,35 @@ const GridContainer: React.FC = () => {
   );
 
   return (
+    // <div className={classes.container} data-testid="gird-container">
+    //   {tickCtx.grid.map((row: number[], rowIndex: number) =>
+    //     row.map((el: number, colIndex: number) => (
+    //       <Cell
+    //         key={`${rowIndex}_${colIndex}`}
+    //         isFilled={el === 1}
+    //         xCor={rowIndex}
+    //         yCor={colIndex}
+    //         onCellClick={onClickOfGridEl}
+    //       />
+    //     ))
+    //   )}
+    // </div>
     <div className={classes.container} data-testid="gird-container">
-      {tickCtx.grid.map((row: number[], rowIndex: number) =>
-        row.map((el: number, colIndex: number) => (
-          <Cell
-            key={`${rowIndex}_${colIndex}`}
-            isFilled={el === 1}
-            xCor={rowIndex}
-            yCor={colIndex}
-            onCellClick={onClickOfGridEl}
-          />
-        ))
-      )}
+      {tickCtx.grid.map((row: number[], rowIndex: number) => {
+        return (
+          <div className={classes.row}>
+            {row.map((el: number, colIndex: number) => (
+              <Cell
+                key={`${rowIndex}_${colIndex}`}
+                isFilled={el === 1}
+                xCor={rowIndex}
+                yCor={colIndex}
+                onCellClick={onClickOfGridEl}
+              />
+            ))}
+          </div>
+        );
+      })}
     </div>
     /*
     <>

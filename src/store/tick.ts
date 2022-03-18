@@ -11,8 +11,8 @@ const DIRECTIONS = [
   [-1, 0],
   [-1, 1],
 ];
-export const getRandomGrid = (): number[][] => {
-  return initalize2D_Arr(50).map((row: number[]) =>
+export const getRandomGrid = (size: number): number[][] => {
+  return initalize2D_Arr(size).map((row: number[]) =>
     row.map(() => {
       return Math.round(Math.random());
     })

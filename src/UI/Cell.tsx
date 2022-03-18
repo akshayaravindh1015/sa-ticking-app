@@ -8,7 +8,7 @@ const NonMemoCell: FC<{
   isFilled: boolean;
   onCellClick: (xCor: number, yCor: number) => void;
 }> = (props) => {
-  // console.log("Redering Cell", props.xCor, props.yCor);
+  console.log("Redering Cell", props.xCor, props.yCor);
 
   const onCellClick = () => {
     props.onCellClick(props.xCor, props.yCor);

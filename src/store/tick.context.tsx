@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { initalize2D_Arr } from "../models/grid.model";
 import { getRandomGrid, tickAndGetNewGrid } from "./tick";
 
+const GRID_SIZE: number = 50;
 type TickContextObj = {
   grid: number[][];
   timerVal: number;
@@ -24,7 +25,7 @@ export const TickContext = React.createContext<TickContextObj>({
 });
 
 const TickContextProvider: React.FC = (props) => {
-  const [grid, setGrid] = useState<number[][]>(initalize2D_Arr(50));
+  const [grid, setGrid] = useState<number[][]>(initalize2D_Arr(GRID_SIZE));
   const [timerVal, setTimerVal] = useState(1000);
 
   const tick = () => {
@@ -45,8 +46,8 @@ const TickContextProvider: React.FC = (props) => {
     );
   };
 
-  const generateRandom = () => {
-    setGrid(() => getRandomGrid());
+  const generateRandom = (size: number) => {
+    setGrid(() => getRandomGrid(size));
   };
 
   const contextValue: TickContextObj = {
@@ -55,7 +56,7 @@ const TickContextProvider: React.FC = (props) => {
     tick: tick,
     setTimerVal: setTimerVal,
     setGrid: setGrid,
-    generateRandom: generateRandom,
+    generateRandom: generateRandom.bind(null, GRID_SIZE),
     toggleGridVal: toggleGridVal,
   };
 

@@ -43,6 +43,11 @@ const App = () => {
   return (
     <div className="container">
       <h1>Seeking Alpha React - Test</h1>
+      <p>
+        You can manually toggle the cells by clicking them as well...Only the
+        cells which are modified will be Re-rendered to avoid unecessary
+        re-renders.( Clear the console and observe the logs for reference )
+      </p>
       <div className="buttons-row">
         <PlayPauseButton
           onClick={clickHanlder}
